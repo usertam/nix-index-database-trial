@@ -26,7 +26,7 @@ jobs:
     strategy:
       matrix:
         channel: [ nixpkgs-unstable ]
-        platform: [ i686-linux, x86_64-linux, aarch64-linux, x86_64-darwin, aarch64-darwin ]
+        platform: [ aarch64-darwin, aarch64-linux, armv5tel-linux, armv6l-linux, armv7l-linux, i686-linux, mipsel-linux, powerpc64le-linux, riscv64-linux, x86_64-darwin, x86_64-linux ]
     steps:
     - uses: cachix/install-nix-action@v17
       with:
