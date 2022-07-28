@@ -9,8 +9,8 @@ Releases follow the
 ## Instructions
 To install, run:
 ```sh
-# determine platform, assume <nixpkgs> is reachable
-PLATFORM="$(nix-instantiate --eval -E '(import <nixpkgs> {}).stdenv.hostPlatform.system' | tr -d \")"
+# determine platform with flakes
+PLATFORM=$(nix eval --raw nixpkgs#stdenv.hostPlatform.system)
 
 # to explicitly state platform instead, do:
 # PLATFORM='aarch64-linux'
