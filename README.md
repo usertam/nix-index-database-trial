@@ -32,15 +32,14 @@ To install using flakes in home-manager:
 
   outputs = { nixpkgs, home-manager, nix-index-db, ... }: {
     homeConfigurations."user" = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages."aarch64-linux";
+      # pkgs = ...
       extraSpecialArgs = { inherit nix-index-db; };
       modules = [
-        ({ pkgs, nix-index-db, ... }: { 
-           home.file.".cache/nix-index/files" = {
-             source = nix-index-db.packages.${pkgs.system}.default;
-           };
-        })
-        # { home = ... };
+        ({ pkgs, nix-index-db, ... }: {
+          home.file.".cache/nix-index/files" = {
+            source = nix-index-db.packages.${pkgs.system}.default;
+          };
+        }) # more modules...
       ];
     };
   };
