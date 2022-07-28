@@ -10,7 +10,7 @@ Releases follow the
 To install, run:
 ```sh
 # determine platform with flakes
-PLATFORM=$(nix eval --raw nixpkgs#stdenv.hostPlatform.system)
+PLATFORM=$(nix eval --raw nixpkgs#system)
 
 # to explicitly state platform instead, do:
 # PLATFORM='aarch64-linux'
