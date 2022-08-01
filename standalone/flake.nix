@@ -24,5 +24,6 @@
             install -Dm444 ${src} $out
           '';
         };
+        defaultPackage = self.packages.${system}.default;
       });
 }
