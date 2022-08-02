@@ -78,11 +78,16 @@ jobs:
     - name: Assert release tag is available
       run: |
         ! git ls-remote --exit-code origin "refs/tags/r${{ steps.tag.outputs.tag }}"
+    - name: Write release markdown
+      run: |
+        >> release.md echo "- Built against channel: [\`${{ matrix.channel }}\`](https://github.com/nixos/nixpkgs/tree/${{ matrix.channel }})"
+        >> release.md echo "- Built against commit: [\`$(grep -oE '^.{7}' revision.txt)\`](https://github.com/NixOS/nixpkgs/commit/$(<revision.txt))"
+        >> release.md echo "- Build date: \`$(date +'%Y-%m-%d')\`"
     - name: Generate release flake and metadata
       run: |
         cp releases/flake.nix .
         python3 releases/describe.py "r${{ steps.tag.outputs.tag }}" ${{ matrix.channel }} $(<revision.txt)
-    - name: Commit to releases/${{ matrix.channel }}
+    - name: Commit r${{ steps.tag.outputs.tag }} to releases/${{ matrix.channel }}
       run: |
         # set HEAD to channel release branch, or new orphan branch if none exists on remote
         git fetch origin releases/${{ matrix.channel }}:releases/${{ matrix.channel }} || true
@@ -92,6 +97,11 @@ jobs:
         git add flake.nix metadata.json indices
         nix flake update
         git add flake.lock
+        # write and add README.md
+        >  README.md echo "# ${GITHUB_REPOSITORY#*/}"
+        >> README.md echo "## release ${{ steps.tag.outputs.tag }}"
+        >> README.md cat release.md
+        git add README.md
         # commit, tag and push
         git commit -m "release ${{ steps.tag.outputs.tag }}"
         git tag "r${{ steps.tag.outputs.tag }}"
@@ -100,7 +110,7 @@ jobs:
       run: |
         cp standalone/flake.nix .
         python3 standalone/describe.py "s${{ steps.tag.outputs.tag }}" ${{ matrix.channel }} $(<revision.txt)
-    - name: Commit to standalone/${{ matrix.channel }}
+    - name: Commit s${{ steps.tag.outputs.tag }} to standalone/${{ matrix.channel }}
       run: |
         # set HEAD to channel standalone branch, or new orphan branch if none exists on remote
         git fetch origin standalone/${{ matrix.channel }}:standalone/${{ matrix.channel }} || true
@@ -110,15 +120,15 @@ jobs:
         git add flake.nix metadata.json
         nix flake update
         git add flake.lock
+        # write and add README.md
+        >  README.md echo "# ${GITHUB_REPOSITORY#*/}"
+        >> README.md echo "## standalone release ${{ steps.tag.outputs.tag }}"
+        >> README.md cat release.md
+        git add README.md
         # commit, tag and push
         git commit -m "standalone release ${{ steps.tag.outputs.tag }}"
         git tag "s${{ steps.tag.outputs.tag }}"
         git push origin standalone/${{ matrix.channel }} "s${{ steps.tag.outputs.tag }}"
-    - name: Format release body
-      run: |
-        >> release.md echo "- Built against channel: [\`${{ matrix.channel }}\`](https://github.com/nixos/nixpkgs/tree/${{ matrix.channel }})"
-        >> release.md echo "- Built against commit: [\`$(grep -oE '^.{7}' revision.txt)\`](https://github.com/NixOS/nixpkgs/commit/$(<revision.txt))"
-        >> release.md echo "- Build date: \`$(date)\`"
     - uses: softprops/action-gh-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
