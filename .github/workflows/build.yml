@@ -84,28 +84,36 @@ jobs:
         python3 releases/describe.py "r${{ steps.tag.outputs.tag }}" ${{ matrix.channel }} $(<revision.txt)
     - name: Commit to releases/${{ matrix.channel }}
       run: |
+        # set HEAD to channel release branch, or new orphan branch if none exists on remote
         git fetch origin releases/${{ matrix.channel }}:releases/${{ matrix.channel }} || true
         git symbolic-ref HEAD refs/heads/releases/${{ matrix.channel }}
         git reset
+        # add files to git index before updating flake.lock
+        git add flake.nix metadata.json indices
         nix flake update
-        git add flake.nix flake.lock metadata.json indices
+        git add flake.lock
+        # commit, tag and push
         git commit -m "release ${{ steps.tag.outputs.tag }}"
         git tag "r${{ steps.tag.outputs.tag }}"
-        git push origin releases/${{ matrix.channel }} "r${{ steps.tag.outputs.tag }}"
+        git push origin "r${{ steps.tag.outputs.tag }}"
     - name: Generate standalone flake and metadata
       run: |
         cp standalone/flake.nix .
         python3 standalone/describe.py "s${{ steps.tag.outputs.tag }}" ${{ matrix.channel }} $(<revision.txt)
     - name: Commit to standalone/${{ matrix.channel }}
       run: |
+        # set HEAD to channel standalone branch, or new orphan branch if none exists on remote
         git fetch origin standalone/${{ matrix.channel }}:standalone/${{ matrix.channel }} || true
         git symbolic-ref HEAD refs/heads/standalone/${{ matrix.channel }}
         git reset
+        # add files to git index before updating flake.lock
+        git add flake.nix metadata.json
         nix flake update
-        git add flake.nix flake.lock metadata.json
+        git add flake.lock
+        # commit, tag and push
         git commit -m "standalone release ${{ steps.tag.outputs.tag }}"
         git tag "s${{ steps.tag.outputs.tag }}"
-        git push origin standalone/${{ matrix.channel }} "s${{ steps.tag.outputs.tag }}"
+        git push origin "s${{ steps.tag.outputs.tag }}"
     - name: Format release body
       run: |
         >> release.md echo "- Built against channel: [\`${{ matrix.channel }}\`](https://github.com/nixos/nixpkgs/tree/${{ matrix.channel }})"
