@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        channel: [ nixpkgs-unstable ]
+        channel: [ nixpkgs-unstable, master ]
     steps:
     - name: Fetch nixpkgs revision
       run: curl https://api.github.com/repos/NixOS/nixpkgs/git/refs/heads/${{ matrix.channel }} | jq .object.sha | tr -d \" > revision.txt
@@ -25,7 +25,7 @@ jobs:
     needs: pin-nixpkgs
     strategy:
       matrix:
-        channel: [ nixpkgs-unstable ]
+        channel: [ nixpkgs-unstable, master ]
         platform: [ aarch64-darwin, aarch64-linux, i686-linux, x86_64-darwin, x86_64-linux ]
     steps:
     - uses: cachix/install-nix-action@v17
@@ -55,7 +55,7 @@ jobs:
     needs: build-database
     strategy:
       matrix:
-        channel: [ nixpkgs-unstable ]
+        channel: [ nixpkgs-unstable, master ]
     steps:
     - uses: actions/checkout@v3
     - uses: cachix/install-nix-action@v17
