@@ -1,13 +1,13 @@
 # nix-index-database
-Tri-weekly updated, multi-platform prebuilt [`nix-index`](https://github.com/usertam/nix-index) indices.
+Tri-weekly updated, multi-channel, multi-platform prebuilt [`nix-index`](https://github.com/usertam/nix-index) indices.
 
 ## Source
-Releases follow the
-[`nixpkgs-unstable`](https://api.github.com/repos/NixOS/nixpkgs/git/refs/heads/nixpkgs-unstable) branch, instead of nixpkgs
-[`master`](https://api.github.com/repos/NixOS/nixpkgs/git/refs/heads/master).
+Releases follow _both_ the
+[`nixpkgs-unstable`](https://api.github.com/repos/NixOS/nixpkgs/git/refs/heads/nixpkgs-unstable) branch and the nixpkgs
+[`master`](https://api.github.com/repos/NixOS/nixpkgs/git/refs/heads/master) branch.
 
 ## Oneshot Install
-To preform a oneshot install, do:
+To preform a oneshot install on `master`, do:
 ```sh
 # determine platform with flakes
 PLATFORM=$(nix eval --raw nixpkgs#system)
@@ -16,12 +16,12 @@ PLATFORM=$(nix eval --raw nixpkgs#system)
 # PLATFORM='aarch64-linux'
 
 mkdir -p $HOME/.cache/nix-index
-curl -Lo $HOME/.cache/nix-index/files \
-    https://github.com/usertam/nix-index-database/releases/latest/download/index-$PLATFORM
+curl -o $HOME/.cache/nix-index/files \
+    https://raw.githubusercontent.com/usertam/nix-index-database-trial/releases/master/indices/index-$PLATFORM
 ```
 
 ## Flakes Install
-To install using flakes in home-manager:
+To install `nixpkgs-unstable` standalone using flakes in home-manager:
 ```nix
 {
   inputs = {
