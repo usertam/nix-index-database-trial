@@ -95,7 +95,7 @@ jobs:
         # commit, tag and push
         git commit -m "release ${{ steps.tag.outputs.tag }}"
         git tag "r${{ steps.tag.outputs.tag }}"
-        git push origin "r${{ steps.tag.outputs.tag }}"
+        git push origin releases/${{ matrix.channel }} "r${{ steps.tag.outputs.tag }}"
     - name: Generate standalone flake and metadata
       run: |
         cp standalone/flake.nix .
@@ -113,7 +113,7 @@ jobs:
         # commit, tag and push
         git commit -m "standalone release ${{ steps.tag.outputs.tag }}"
         git tag "s${{ steps.tag.outputs.tag }}"
-        git push origin "s${{ steps.tag.outputs.tag }}"
+        git push origin standalone/${{ matrix.channel }} "s${{ steps.tag.outputs.tag }}"
     - name: Format release body
       run: |
         >> release.md echo "- Built against channel: [\`${{ matrix.channel }}\`](https://github.com/nixos/nixpkgs/tree/${{ matrix.channel }})"
