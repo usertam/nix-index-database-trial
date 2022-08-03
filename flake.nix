@@ -19,5 +19,6 @@
             install -Dm444 -t $out ${src}/indices/index-*
           '';
         };
+        defaultPackage = self.packages.${system}.default;
       });
 }
