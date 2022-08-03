@@ -1,29 +1,29 @@
 {
-    "version": "s220801.a3fddd4",
+    "version": "s220803.f310f24",
     "source": {
         "channel": "nixpkgs-unstable",
-        "revision": "a3fddd46a7f3418d7e3940ded94701aba569161d"
+        "revision": "f310f24f0d4cd5e8660ccde49e8cbd8dbf0295fa"
     },
     "platform": {
         "i686-linux": {
             "store": "indices/index-i686-linux",
-            "hash": "sha256-kJyOx8LbCfiNF/aJVHqqvQreHFEvjkRVeUgyDrR3vXI="
+            "hash": "sha256-LtBXxRyFGZWl2rbu6HcS4LQpIEe+FwMtYDet+dI2wpo="
         },
         "aarch64-linux": {
             "store": "indices/index-aarch64-linux",
-            "hash": "sha256-FeniDJUgTkuv2lCsLe/DoZojHnTMzcIxOtmynZCDi4o="
+            "hash": "sha256-44qNUr3vHdz5rtXmnZ/+IYsyhfI6nk4+gP9b0iaAttE="
         },
         "aarch64-darwin": {
             "store": "indices/index-aarch64-darwin",
-            "hash": "sha256-Z8fzaipXZjkh/AHrZLr1UHBTHbC6xb3lykQOIM/owyQ="
+            "hash": "sha256-Wf8M/wc5dcrkbTrYSl8Ki9iCMVHZ1cyh7y1tM62xytE="
         },
         "x86_64-darwin": {
             "store": "indices/index-x86_64-darwin",
-            "hash": "sha256-eTcgL9cadGa5079SSepfrRA7QtEW+ZiPxKdorZvV5j8="
+            "hash": "sha256-v399IBbQpIh7j2zZulB286O14HXlaBRq7N6eZA7K/Ro="
         },
         "x86_64-linux": {
             "store": "indices/index-x86_64-linux",
-            "hash": "sha256-qzFeJD78nBK11ZGC35xeeNyq8Ja4uxjp15ZQEuETHzw="
+            "hash": "sha256-Ld77pS+01D7om/QoBdeUNq+CnHWq5OTbRXzhI2nefdA="
         }
     }
 }
