@@ -1,7 +1,7 @@
 {
-    "version": "r220803.f310f24",
+    "version": "r220805.5f9b871",
     "source": {
         "channel": "nixpkgs-unstable",
-        "revision": "f310f24f0d4cd5e8660ccde49e8cbd8dbf0295fa"
+        "revision": "5f9b871b72b24f066b1a1e189efd0669f2888c49"
     }
 }
