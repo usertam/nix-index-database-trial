@@ -1,5 +1,5 @@
 # nix-index-database-trial
-## standalone release 220803.12363fb
+## standalone release 220805.ae68099
 - Built against channel: [`master`](https://github.com/nixos/nixpkgs/tree/master)
-- Built against commit: [`12363fb`](https://github.com/NixOS/nixpkgs/commit/12363fb6d89859a37cd7e27f85288599f13e49d9)
-- Build date: `2022-08-03`
+- Built against commit: [`ae68099`](https://github.com/NixOS/nixpkgs/commit/ae68099d4d162707813803fb273c582630769da8)
+- Build date: `2022-08-05`
