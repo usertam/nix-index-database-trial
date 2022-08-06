@@ -25,23 +25,23 @@ To install `nixpkgs-unstable` standalone using flakes in home-manager:
 ```nix
 {
   inputs = {
-    # nixpkgs, home-manager...
     nix-index-db.url = "github:usertam/nix-index-database-trial/standalone/nixpkgs-unstable";
     nix-index-db.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { nixpkgs, home-manager, nix-index-db, ... }: {
-    homeConfigurations."user" = home-manager.lib.homeManagerConfiguration {
-      # pkgs = ...
-      extraSpecialArgs = { inherit nix-index-db; };
-      modules = [
-        ({ pkgs, nix-index-db, ... }: {
-          home.file.".cache/nix-index/files" = {
-            source = nix-index-db.packages.${pkgs.system}.default;
-          };
-        }) # more modules...
-      ];
+  outputs = { nix-index-db, ... }:
+    let
+      system = "x86_64-linux";
+      nix-index-bin = nix-index-db.packages.${system}.default;
+    in {
+      homeConfigurations."user" = home-manager.lib.homeManagerConfiguration {
+        extraSpecialArgs = { inherit nix-index-bin; };
+        modules = [
+          ({ nix-index-bin, ... }: {
+            home.file.".cache/nix-index/files".source = nix-index-bin;
+          })
+        ];
+      };
     };
-  };
 }
 ```
