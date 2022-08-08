@@ -1,5 +1,5 @@
 # nix-index-database-trial
-## release 220805.5f9b871
+## release 220808.80fc83a
 - Built against channel: [`nixpkgs-unstable`](https://github.com/nixos/nixpkgs/tree/nixpkgs-unstable)
-- Built against commit: [`5f9b871`](https://github.com/NixOS/nixpkgs/commit/5f9b871b72b24f066b1a1e189efd0669f2888c49)
-- Build date: `2022-08-05`
+- Built against commit: [`80fc83a`](https://github.com/NixOS/nixpkgs/commit/80fc83ad314fe701766ee66ac8286307d65b39e3)
+- Build date: `2022-08-08`
