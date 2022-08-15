@@ -1,5 +1,5 @@
 # nix-index-database-trial
-## standalone release 220812.964d60f
+## standalone release 220815.bc4b4a5
 - Built against channel: [`nixpkgs-unstable`](https://github.com/nixos/nixpkgs/tree/nixpkgs-unstable)
-- Built against commit: [`964d60f`](https://github.com/NixOS/nixpkgs/commit/964d60ff2e6bc76c0618962da52859603784fa78)
-- Build date: `2022-08-12`
+- Built against commit: [`bc4b4a5`](https://github.com/NixOS/nixpkgs/commit/bc4b4a50c7a105c56f1b712a87818678298deef3)
+- Build date: `2022-08-15`
